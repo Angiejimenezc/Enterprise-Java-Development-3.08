@@ -7,35 +7,39 @@ import java.util.Date;
 
 @Entity
 public class Member {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
+
+    public Member(int id, String name, Chapter chapter, Status status, Date renewalDate) {
+        this.id = id;
+        this.name = name;
+        this.chapter = chapter;
+        this.status = status;
+        this.renewalDate = renewalDate;
+    }
+
     private String name;
-    private Status status;
-    private Date renewalDate;
     @ManyToOne
     @JoinColumn(name = "chapter_id")
     private Chapter chapter;
 
-    public Member(){
+    public Member() {
 
     }
 
-    public Member(Integer id, String name, Status status, Date renewalDate, Chapter chapter) {
+    public Member(int id, String name, Status status, Date renewalDate) {
         this.id = id;
         this.name = name;
         this.status = status;
         this.renewalDate = renewalDate;
-        this.chapter = chapter;
     }
 
-
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -63,11 +67,9 @@ public class Member {
         this.renewalDate = renewalDate;
     }
 
-    public Chapter getChapter() {
-        return chapter;
-    }
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
-    public void setChapter(Chapter chapter) {
-        this.chapter = chapter;
-    }
+    private Date renewalDate;
+
 }

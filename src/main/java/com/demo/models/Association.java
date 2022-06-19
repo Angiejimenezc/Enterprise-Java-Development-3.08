@@ -2,20 +2,18 @@ package com.demo.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.List;
 
 @Entity
 public class Association {
 
-@Id
-private int id;
-private String name;
+    @Id
+    private int id;
+
 
     public Association() {
-    }
 
-    public Association(int id, String name) {
-        this.id = id;
-        this.name = name;
     }
 
     public int getId() {
@@ -33,4 +31,23 @@ private String name;
     public void setName(String name) {
         this.name = name;
     }
+
+    public List<Chapter> getChapters() {
+        return chapters;
+    }
+
+    public void setChapters(List<Chapter> chapters) {
+        this.chapters = chapters;
+    }
+
+    public Association(int id, String name, List<Chapter> chapters) {
+        this.id = id;
+        this.name = name;
+        this.chapters = chapters;
+    }
+
+    private String name;
+
+    @OneToMany(mappedBy = "association")
+    private List<Chapter> chapters;
 }

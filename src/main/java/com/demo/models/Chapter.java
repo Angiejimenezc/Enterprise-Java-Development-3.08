@@ -2,37 +2,25 @@ package com.demo.models;
 
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
 
 @Entity
 public class Chapter {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
+
     private String name;
+
     private String district;
 
-
     @OneToOne
-    @JoinColumn( name= "president_id")
+    @JoinColumn(name = "president_id")
     private Member president;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "chapter")
-    private Set<Member> members = new HashSet<>();
-
-    public Chapter(){
-
-    }
-
-    public Chapter(int id, String name, String district, Member president, List<Member> members) {
-        this.id = id;
-        this.name = name;
-        this.district = district;
-        this.president = president;
-        //this.members = members;
-    }
+    @OneToMany(mappedBy = "chapter")
+    private List<Member> members;
 
     public int getId() {
         return id;
@@ -58,6 +46,38 @@ public class Chapter {
         this.district = district;
     }
 
+    public List<Member> getMembers() {
+        return members;
+    }
+
+    public void setMembers(List<Member> members) {
+        this.members = members;
+    }
+
+    public Association getAssociation() {
+        return association;
+    }
+
+    public void setAssociation(Association association) {
+        this.association = association;
+    }
+
+    public Chapter() {
+
+    }
+    public Chapter(int id, String name, String district, Member president, List<Member> members, Association association) {
+        this.id = id;
+        this.name = name;
+        this.district = district;
+        this.president = president;
+        this.members = members;
+        this.association = association;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "association_id")
+    private Association association;
+
     public Member getPresident() {
         return president;
     }
@@ -65,10 +85,4 @@ public class Chapter {
     public void setPresident(Member president) {
         this.president = president;
     }
-
-
-
-
-
-
 }

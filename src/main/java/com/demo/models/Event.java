@@ -4,42 +4,22 @@ package com.demo.models;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Event {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private Date date;
-    private int duration;
-    private String location;
-    private String title;
-
-    @ManyToMany
-    @JoinTable(name = "events_guests",
-            joinColumns = {@JoinColumn(name = "event_id")},
-            inverseJoinColumns = {@JoinColumn(name = "guest_id")})
-    private Set<Guest> list = new HashSet<Guest>();
 
     public Event() {
+
     }
 
-    public Event(Long id, Date date, int duration, String location, String title, Set<Guest> list) {
-        this.id = id;
-        this.date = date;
-        this.duration = duration;
-        this.location = location;
-        this.title = title;
-        this.list = list;
-    }
-
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -75,11 +55,30 @@ public class Event {
         this.title = title;
     }
 
-    public Set<Guest> getList() {
-        return list;
+    public List<Guest> getGuests() {
+        return guests;
     }
 
-    public void setList(Set<Guest> list) {
-        this.list = list;
+    public void setGuests(List<Guest> guests) {
+        this.guests = guests;
     }
+
+    public Event(int id, Date date, int duration, String location, String title, List<Guest> guests) {
+        this.id = id;
+        this.date = date;
+        this.duration = duration;
+        this.location = location;
+        this.title = title;
+        this.guests = guests;
+    }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private Date date;
+    private int duration;
+    private String location;
+    private String title;
+    @OneToMany(mappedBy = "event")
+    private List<Guest> guests;
 }

@@ -1,5 +1,6 @@
 package com.demo.models;
 
+import com.demo.enums.Status;
 import com.demo.enums.Status2;
 
 import javax.persistence.*;
@@ -8,26 +9,36 @@ import javax.persistence.*;
 public class Guest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
     private String name;
-    @Enumerated(EnumType.STRING)
-    private Status2 status;
 
-    public Guest() {
+    public Event getEvent() {
+        return event;
     }
 
-    public Guest(Long id, String name, Status2 status) {
+    public void setEvent(Event event) {
+        this.event = event;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "event_id")
+    private Event event;
+
+    public Guest() {
+
+    }
+
+    public Guest(int id, String name, Status status) {
         this.id = id;
         this.name = name;
         this.status = status;
     }
 
-
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -39,11 +50,14 @@ public class Guest {
         this.name = name;
     }
 
-    public Status2 getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(Status2 status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
+
+    @Enumerated(EnumType.STRING)
+    private Status status;
 }

@@ -10,7 +10,4 @@ public class Exposition extends Event {
     public Exposition() {
     }
 
-    public Exposition(Long id, Date date, int duration, String location, String title, Set<Guest> list) {
-        super(id, date, duration, location, title, list);
-    }
 }

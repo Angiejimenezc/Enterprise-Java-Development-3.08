@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Speaker {
+public class Speakers {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -16,10 +16,10 @@ public class Speaker {
 
     private int presentationDuration;
 
-    public Speaker() {
+    public Speakers() {
     }
 
-    public Speaker(Long id, String name, int presentationDuration) {
+    public Speakers(Long id, String name, int presentationDuration) {
         this.id = id;
         this.name = name;
         this.presentationDuration = presentationDuration;

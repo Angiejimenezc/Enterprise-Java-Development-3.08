@@ -38,9 +38,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
         void setUp() {
             LocalDate date = LocalDate.of(2022,6,28);
 
-            guestRepository.saveAll(List.of(new Guest(255L,"Miguel Hernandez", Status2.ATTENDING),new Guest(256L,"Ramiro Hernandez", Status2.ATTENDING),new Guest(257L,"Laura Hernandez", Status2.ATTENDING)));
-            //eventRepository.saveAll(List.of(new Event(22L,80,"Madrid","Summer event",null)));
-            //Event e1 = new Event(22L,date,80,"Madrid","Summer Event", guestRepository.getReferenceById());
 
         }
 
